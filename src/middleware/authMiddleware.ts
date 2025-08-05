@@ -22,14 +22,14 @@ export const authMiddleware = async (
     if (!token) {
       return res
         .status(401)
-        .json({ msg: "No token provided, authorization denied" });
+        .json({ message: "No token provided, authorization denied" });
     }
 
     // verify the token is valid
     const verify = jwt.verify(token, process.env.JWT_SECRET!);
 
     if (!verify) {
-      res.status(401).json({ msg: "Token is not valid" });
+      res.status(401).json({ message: "Token is not valid" });
       return;
     }
 
@@ -42,7 +42,7 @@ export const authMiddleware = async (
       .where(eq(usersTable.id, verifiedToken.id));
 
     if (!user) {
-      res.status(401).json({ msg: "Users not found!" });
+      res.status(401).json({ message: "Users not found!" });
       return;
     }
 

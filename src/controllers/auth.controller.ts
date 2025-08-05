@@ -33,7 +33,7 @@ export const signup = async (
       .where(eq(usersTable.email, email));
 
     if (existingUser.length) {
-      return res.status(400).json({ msg: "User already exists" });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -129,7 +129,7 @@ export const jwtVerification = async (req: Request, res: Response) => {
 export const getAllUsers = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user) {
-      res.status(401).json({ msg: "No user found!" });
+      res.status(401).json({ message: "No user found!" });
       return;
     }
 
@@ -142,7 +142,7 @@ export const getAllUsers = async (req: AuthRequest, res: Response) => {
       .where(eq(usersTable.id, userId));
 
     if (!user) {
-      res.status(401).json({ msg: "Users not found!" });
+      res.status(401).json({ message: "Users not found!" });
       return;
     }
 
