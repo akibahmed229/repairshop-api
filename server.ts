@@ -1,9 +1,16 @@
-import express, { Request, Response, NextFunction } from "express"; // Default import
+import express, { Request, Response } from "express"; // Default import
 import cors from "cors";
 import path from "path";
+import cookieParser from "cookie-parser";
 import { corsOptions } from "./config/corsOptions";
 import { logger } from "./src/middleware/logEvents";
 import { errorHandler } from "./src/middleware/errorHandler";
+import { router } from "./src/routes/root";
+import { authRouter } from "./src/routes/auth.route";
+import dotenv from "dotenv";
+
+// setup env secret
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3500;
@@ -17,6 +24,9 @@ app.use(cors(corsOptions));
 // built-in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
 
+// parse cookie from request
+app.use(cookieParser());
+
 // built-in middleware for json
 app.use(express.json());
 
@@ -24,12 +34,11 @@ app.use(express.json());
 app.use("/", express.static(path.join(__dirname, "/public")));
 
 // routes
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/", router);
+app.use("/api", authRouter);
 
-// Catch-all for 404 (must be placed after all routes)
-app.use((req: Request, res: Response, next: NextFunction) => {
+// fallback for 404
+app.use((req: Request, res: Response) => {
   res.status(404);
   if (req.accepts("html")) {
     res.sendFile(path.join(__dirname, "src", "views", "404.html"));
@@ -43,5 +52,5 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });

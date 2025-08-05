@@ -1,0 +1,32 @@
+services:
+  backend:
+    container_name: repair_shop_backend
+    build:
+      context: ./
+    ports:
+      - 3500:3500
+    environment:
+      - PORT=3500
+      - DATABASE_URL=postgresql://repair_shop:repair123@repair_shop_db:5432/repairshop
+
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+      - /app/node_modules
+
+  db:
+    image: postgres:16
+    container_name: repair_shop_db
+    restart: always
+    environment:
+      POSTGRES_USER: repair_shop
+      POSTGRES_PASSWORD: repair123
+      POSTGRES_DB: repairshop
+    ports:
+      - 5033:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -12,3 +12,7 @@ body {
   display: grid;
   place-content: center;
 }
+
+.error {
+  color: red;
+}
