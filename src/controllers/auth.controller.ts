@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express"; // Default import
-import { NewUser, usersTable } from "../models/sechema";
+import { NewUser, usersTable } from "../models/userSechema";
 import { db } from "../../config/db";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";

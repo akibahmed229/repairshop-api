@@ -2,7 +2,7 @@ import { UUID } from "crypto";
 import { eq } from "drizzle-orm";
 import { Request, Response, NextFunction } from "express"; // Default import
 import { TokenExpiredError } from "jsonwebtoken";
-import { usersTable } from "../models/sechema";
+import { usersTable } from "../models/userSechema";
 import { db } from "../../config/db";
 import jwt from "jsonwebtoken";
 
