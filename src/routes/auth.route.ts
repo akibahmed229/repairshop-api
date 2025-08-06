@@ -5,14 +5,14 @@ import {
   login,
   signup,
 } from "../controllers/auth.controller";
-import { loginLimiter } from "../middleware/loginLimiter";
 import { authMiddleware } from "../middleware/authMiddleware";
+import { apiRateLimiter } from "../middleware/apiRateLimiter";
 
 export const authRouter: Router = express.Router();
 
-authRouter.route("/sginup").post(signup);
+authRouter.route("/sginup").post(apiRateLimiter, signup);
 
-authRouter.route("/login").post(loginLimiter, login);
+authRouter.route("/login").post(apiRateLimiter, login);
 
 authRouter.route("/jwt").post(jwtVerification);
 
