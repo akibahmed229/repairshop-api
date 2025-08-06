@@ -10,7 +10,9 @@ import { authRouter } from "./src/routes/auth.route";
 import dotenv from "dotenv";
 
 // setup env secret
-dotenv.config();
+dotenv.config({
+  override: true,
+});
 
 const app = express();
 const port = process.env.PORT || 3500;
