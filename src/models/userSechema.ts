@@ -6,7 +6,6 @@ import {
   boolean,
   pgEnum,
 } from "drizzle-orm/pg-core";
-import { sql } from "drizzle-orm";
 
 // define enum for roles
 export const userRolesEnum = pgEnum("user_roles", [
