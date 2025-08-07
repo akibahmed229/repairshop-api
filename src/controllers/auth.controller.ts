@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express"; // Default import
+import { Request, Response } from "express"; // Default import
 import { NewUser, usersTable } from "../models/userSchema";
 import { db } from "../../config/db";
 import { eq } from "drizzle-orm";

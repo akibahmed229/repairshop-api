@@ -3,7 +3,7 @@ import { usersTable } from "./userSchema";
 
 export const techNotesTable = pgTable("techNotes", {
   id: uuid("id").primaryKey().defaultRandom(),
-  user: uuid("user_id")
+  userId: uuid("user_id")
     .notNull()
     .references(() => usersTable.id, { onDelete: "cascade" }),
   title: text("title").notNull(),
