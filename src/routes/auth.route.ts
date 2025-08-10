@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 import {
-  getAllUsers,
+  getUserByToken,
   jwtVerification,
   login,
   signup,
@@ -16,4 +16,4 @@ authRouter.route("/login").post(apiRateLimiter, login);
 
 authRouter.route("/jwt").post(jwtVerification);
 
-authRouter.route("/users").get(authMiddleware, getAllUsers);
+authRouter.route("/user").get(authMiddleware, getUserByToken);
