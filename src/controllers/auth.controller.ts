@@ -27,6 +27,11 @@ export const signup = async (
   try {
     const { name, email, password } = req.body;
 
+    // confirm data
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
     const existingUser = await db
       .select()
       .from(usersTable)
@@ -59,6 +64,11 @@ export const login = async (
 ) => {
   try {
     const { email, password } = req.body;
+
+    // confirm data
+    if (!email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
 
     const [existingUser] = await db
       .select()
@@ -126,7 +136,7 @@ export const jwtVerification = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllUsers = async (req: AuthRequest, res: Response) => {
+export const getUserByToken = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user) {
       res.status(401).json({ message: "No user found!" });
