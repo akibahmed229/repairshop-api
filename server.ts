@@ -9,6 +9,7 @@ import { router } from "./src/routes/root";
 import { authRouter } from "./src/routes/auth.route";
 import dotenv from "dotenv";
 import { techNoteRouter } from "./src/routes/techNote.route";
+import { userRouter } from "./src/routes/user.routes";
 
 // setup env secret
 dotenv.config({
@@ -38,7 +39,7 @@ app.use("/", express.static(path.join(__dirname, "/public")));
 
 // routes
 app.use("/", router);
-app.use("/api", authRouter, techNoteRouter);
+app.use("/api", authRouter, techNoteRouter, userRouter);
 
 // fallback for 404
 app.use((req: Request, res: Response) => {
