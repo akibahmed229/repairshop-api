@@ -2,7 +2,7 @@ import express, { Request, Response } from "express"; // Default import
 import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
-import { corsOptions } from "./config/corsOptions";
+import { corsOptions } from "./src/config/corsOptions";
 import { logger } from "./src/middleware/logEvents";
 import { errorHandler } from "./src/middleware/errorHandler";
 import { router } from "./src/routes/root";

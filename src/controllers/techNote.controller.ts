@@ -4,10 +4,9 @@ import {
     TechNotes,
     techNotesTable,
 } from "../models/techNoteSchema";
-import { db } from "../../config/db";
+import { db } from "../config/db";
 import { and, eq, sql } from "drizzle-orm";
 import { usersTable } from "../models/userSchema";
-import { log } from "console";
 
 export const getAllNotes = async (
     req: Request<{}, {}, TechNotes>,
