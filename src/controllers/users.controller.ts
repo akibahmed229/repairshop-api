@@ -170,7 +170,7 @@ export const updateUser = async (
 
         // execute update (Only if there are fields to update)
         if (Object.keys(updatePayload).length === 1 && 'updatedAt' in updatePayload) {
-            return res.status(200).json({ message: "No data provided for update." });
+            return res.status(201).json({ message: "No data provided for update." });
         }
 
         const [user] = await db.update(usersTable).
@@ -181,7 +181,7 @@ export const updateUser = async (
         // Clean up response
         const { password: _, ...userWithoutPassword } = user;
 
-        res.status(201).json(userWithoutPassword);
+        res.json(userWithoutPassword);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: `Internal Server Error :${error}` });
